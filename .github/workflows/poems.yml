@@ -1,0 +1,23 @@
+name: Poems
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  runs-on: ubuntu-latest
+  steps:
+    - name: PR Poet
+      id: poet
+      uses: mkly/pr-poet@v1.0.0
+      with:
+        message: ${{ github.event.pull_request.title }}
+    - name: Post comment to PR
+      uses: actions/github-script@v6
+      with:
+        script: |
+          await github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `${step.poet.outputs.poem}`
+          })
