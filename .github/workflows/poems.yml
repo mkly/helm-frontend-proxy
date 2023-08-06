@@ -12,6 +12,9 @@ jobs:
         uses: mkly/pr-poet@v1.0.4
         with:
           message: ${{ github.event.pull_request.title }}
+      - shell: bash
+        run: |
+          echo ${{steps.poet.outputs.poem}}
       - name: Post comment to PR
         uses: actions/github-script@v6
         with:
