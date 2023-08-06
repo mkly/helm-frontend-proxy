@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: PR Poet
         id: poet
-        uses: mkly/pr-poet@v1.0.4
+        uses: mkly/pr-poet@v1.0.5
         with:
           message: ${{ github.event.pull_request.title }}
       - shell: bash
